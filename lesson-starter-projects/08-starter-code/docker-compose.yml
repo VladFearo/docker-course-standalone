@@ -1,1 +1,17 @@
 # Developer: Captain DevOps, I noticed a docker-compose.yml file, but I don't know the first thing about Docker Compose, so I'll leave the container orchestration to you. Happy sailing!
+version: '3'
+services:
+  flask-app:
+    image: rslim087/grade-submission-portal:1.0.0
+    container_name: flask-app
+    ports:
+      - "5000:5000"
+    environment:
+      - GRADE_SERVICE_HOST=node_server
+    depends_on:
+      - node_server
+  node_server:
+    image: rslim087/grade-submission-api:1.0.0
+    container_name: node-node_server
+    ports:
+      - "3000:3000"
